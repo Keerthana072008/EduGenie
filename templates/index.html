@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGenie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🎓 Welcome to EduGenie</h1>
+
+    <form method="POST">
+        <input type="text" name="topic" placeholder="Enter your topic" required>
+        <button type="submit">Explain</button>
+    </form>
+
+    {% if result %}
+
+    <div class="result-box">
+        <h3>📘 Explanation</h3>
+        <p>{{ result }}</p>
+    </div>
+
+    <div class="result-box">
+        <h3>📝 Summary</h3>
+        <p>{{ summary }}</p>
+    </div>
+
+    <div class="result-box">
+        <h3>❓ Quiz</h3>
+        <p>{{ quiz }}</p>
+    </div>
+
+    <div class="result-box">
+        <h3>💬 Ask a Question</h3>
+        <form method="POST">
+            <input type="hidden" name="topic" value="{{ topic }}">
+            <input type="text" name="question" placeholder="Ask anything">
+            <button type="submit">Ask</button>
+        </form>
+
+        {% if answer %}
+        <p>{{ answer }}</p>
+        {% endif %}
+    </div>
+
+    <div class="result-box">
+        <h3>🛣️ Learning Path</h3>
+        <ul>
+            {% for step in path %}
+            <li>{{ step }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
